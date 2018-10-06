@@ -53,7 +53,13 @@ public class GrabThrow : MonoBehaviour
                 //Throw our object. First we make it unkinematic so physics apply, then add the impulse force. 
                 //Finally, remove our occupied and held flags as well as restore its collider.
                 held.GetComponent<Rigidbody>().isKinematic = false;
-                held.GetComponent<Rigidbody>().AddForce(new Vector3((1.0f * facing), 0.5f) * throwStrength, ForceMode.Impulse);
+
+                if (Input.GetAxis("Vertical") != 0)
+                    held.GetComponent<Rigidbody>().AddForce(new Vector3(0f, (Input.GetAxisRaw("Vertical")) * 2) * throwStrength, ForceMode.Impulse);
+
+                if (Input.GetAxis("Vertical") == 0)
+                    held.GetComponent<Rigidbody>().AddForce(new Vector3((1.0f * facing), 0.5f) * throwStrength, ForceMode.Impulse);
+
                 held.GetComponent<Collider>().enabled = true;
                 occupied = false;
                 held = null;

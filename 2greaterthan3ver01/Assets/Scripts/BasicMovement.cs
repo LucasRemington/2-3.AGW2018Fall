@@ -218,7 +218,7 @@ public class BasicMovement : MonoBehaviour
         }
         else
         {
-            //Change momentum in the air. Velocity is capped at air force speed.
+            //Change momentum in the air. Velocity is capped at running speed. Air Force is just the amount of control the player has.
             if ((rb.velocity.x > airMoveForce || rb.velocity.x < -airMoveForce))
             {
                 rb.velocity = new Vector3(airMoveForce * facing, rb.velocity.y, rb.velocity.z);
