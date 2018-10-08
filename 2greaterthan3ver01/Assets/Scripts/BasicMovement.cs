@@ -20,15 +20,15 @@ public class BasicMovement : MonoBehaviour
     private float lastVelX = 0.0f;
     private bool lastGrounded;
     private Rigidbody rb;
-    [SerializeField] private bool grounded;
+    private bool grounded;
     private int groundedCount;
     RaycastHit hitCenter, hitFront, hitBack;
     private int groundBack, groundFront, groundCenter;
     public float coyoteTime = 20f;
     private float coyote;
     public float maxJumpTime = 20f;
-    [SerializeField] private float jumpTime;
-    [SerializeField] private bool jumpReleased = true;
+    private float jumpTime;
+    private bool jumpReleased = true;
 
     //For the Raycast, we want to cast twice, from the front and from the back of the player.
     public GameObject castFront, castBack, castCenter;

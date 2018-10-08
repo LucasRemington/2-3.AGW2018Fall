@@ -39,10 +39,13 @@ public class GrabThrow : MonoBehaviour
         if (Input.GetButtonUp("XboxB") == true)
             canUse = true;
 
+        //Facing is used to determine what direction we throw stuff in. Note, you can throw stuff at yourself as this differs
+        //from normal facing in BasicMovement.cs
         if (Input.GetAxisRaw("Horizontal") > 0)
             facing = 1;
         if (Input.GetAxisRaw("Horizontal") < 0)
             facing = -1;
+
         if (occupied && held != null)
         {
             //Keep the held object in front of us.
@@ -60,7 +63,7 @@ public class GrabThrow : MonoBehaviour
                 if (Input.GetAxis("Vertical") == 0)
                     held.GetComponent<Rigidbody>().AddForce(new Vector3((1.0f * facing), 0.5f) * throwStrength, ForceMode.Impulse);
 
-                held.GetComponent<Collider>().enabled = true;
+                held.GetComponent<Collider>().isTrigger = false;
                 occupied = false;
                 held = null;
             }
@@ -93,7 +96,7 @@ public class GrabThrow : MonoBehaviour
             if (other.tag == "Pickup")
             {
                 // Once we pick up an object, do the following: Disable collider, disable physics, move it to a specified point in the editor.
-                other.gameObject.GetComponent<Collider>().enabled = false;
+                other.gameObject.GetComponent<Collider>().isTrigger = true;
                 other.gameObject.GetComponent<Rigidbody>().isKinematic = true;
                     //ToDo for polish: Interpolate distance more smoothly over a short period of time so it doesn't just teleport.
                 //other.gameObject.transform.position = Vector3.Lerp(other.gameObject.transform.position, holdPoint.position, 1);
