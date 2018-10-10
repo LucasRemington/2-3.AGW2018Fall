@@ -41,7 +41,7 @@ public class BasicMovement : MonoBehaviour
    
 
     //Animation stuff, will use it later.
-    //public Animator anim;
+    public Animator anim;
 
     void Start ()
     {
@@ -140,6 +140,14 @@ public class BasicMovement : MonoBehaviour
                 rb.useGravity = true;
             }
 
+            //Added this bit so that the character only runs when he's on the ground. It seems inefficient, will try to figure out a better way to do this. -- Lucas
+            if (grounded == true)
+            {
+                anim.SetBool("Grounded", true);
+            } else
+            {
+                anim.SetBool("Grounded", false);
+            }
 
             // This section just turns our model around to face the direction we're moving.
             if (rb.velocity.x > 0.2f)
@@ -180,7 +188,7 @@ public class BasicMovement : MonoBehaviour
                 jumpTime -= 1.0f;
                 rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
                 rb.useGravity = true;
-                //anim.SetTrigger("Jump");
+                anim.SetTrigger("Jump");
             }
         }
 
@@ -192,6 +200,7 @@ public class BasicMovement : MonoBehaviour
         else if ((jumpTime > 0 && jumpTime < maxJumpTime) && rb.velocity.y > 0 && (Input.GetButton("XboxA") == true) && !jumpReleased)
         {
             rb.AddForce(transform.up * (jumpForce / 2), ForceMode.Impulse);
+            //anim.SetTrigger("Jump");
         }
     }
 
@@ -208,12 +217,12 @@ public class BasicMovement : MonoBehaviour
             rb.velocity = movement;
             if (moveHorizontal != 0.0f)
             {
-                //anim.SetBool("Running", true);
+                anim.SetBool("Running", true);
                 //Idea for future: when animating, multiply animation speed by moveHorizontal, since that's a 0 to 1 scale
             }
             else
             {
-                //anim.SetBool("Running", false);
+                anim.SetBool("Running", false);
             }
         }
         else

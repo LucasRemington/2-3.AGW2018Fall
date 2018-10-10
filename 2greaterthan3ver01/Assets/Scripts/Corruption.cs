@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Corruption : MonoBehaviour
 {
@@ -8,21 +9,30 @@ public class Corruption : MonoBehaviour
     // corrCap determines what corrFast needs to be full.
     public int corrCap;
     [HideInInspector] public int corrSlow, corrFast;
-
     private bool corrupting;
+    //Part of UI fix -- Lucas
+    public GameObject corrOverlay;
 	
 	void Start ()
     {
         corrSlow = 0;
         corrFast = 0;
 	}
-	
-	
-	void Update ()
+
+
+    void Update()
+        //This is my very quick fix for UI -- Lucas
     {
+        if (corrupting == true) {
+        Debug.Log(corrupting);
+        corrOverlay.SetActive(true);
+        } else {
+        corrOverlay.SetActive(false);
+        }
         // This de-increments our fast corruption when the player isn't currently being corrupted.
         if (!corrupting && corrFast > 0)
             corrFast--;
+
 	}
 
     private void OnTriggerStay(Collider other)
