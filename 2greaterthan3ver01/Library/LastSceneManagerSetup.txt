@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/MechanicsTest.unity
+=======
+- path: Assets/Scenes/final level graybox.unity
+>>>>>>> TorreyTest
   isLoaded: 1
   isActive: 1
