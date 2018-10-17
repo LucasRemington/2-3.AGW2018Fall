@@ -81,14 +81,27 @@ public class GrabThrow : MonoBehaviour
         //Pushable objects need the button held down. Interactables otherwise just need a single tap.
         if (Input.GetButton("XboxB") == true && !occupied && other.tag == "Pushable")
         {
-            //Check for pushable objects.
-            if (other.tag == "Pushable")
+
+            // We already know this object is pushable, so we just double check that we're grounded so we can't push something mid-air.
+            if (rb.gameObject.GetComponent<BasicMovement>().grounded == true)
             {
                 //Setting kinematic to false allows it to move via physics. Once we release the interact button,
                 //turning kinematic back on means only scripts can move it.
+                //We also call the movement script's pushing bool.
+                rb.gameObject.GetComponent<BasicMovement>().pushing = true;
                 other.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+
+                // We create a fixed joint while the button is being held down. This allows us to pull it.
+                if (!rb.gameObject.GetComponent<FixedJoint>())
+                {
+                    var attach = rb.gameObject.AddComponent<FixedJoint>();
+                    attach.connectedBody = other.GetComponent<Rigidbody>();
+                    attach.enableCollision = true;
+                }
             }
         }
+
+
 
         if (Input.GetButtonDown("XboxB") == true && !occupied)
         {
@@ -104,6 +117,8 @@ public class GrabThrow : MonoBehaviour
                 occupied = true;
                 canUse = false;
             }
+
+
 
             //Check for objects that can otherwise be used.
             if (other.tag == "Checkable" && !occupied)
@@ -122,12 +137,19 @@ public class GrabThrow : MonoBehaviour
             }
         }
 
+
+
         else if (Input.GetButton("XboxB") == false)
         {
             //Release pushable objects.
             if (other.tag == "Pushable")
             {
+                Debug.Log("Release");
                 other.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+                rb.gameObject.GetComponent<BasicMovement>().pushing = false;
+
+                //Destroy fixed joint.
+                Destroy(rb.gameObject.GetComponent<FixedJoint>());
             }
         }
     }

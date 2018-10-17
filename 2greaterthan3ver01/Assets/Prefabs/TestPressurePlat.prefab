@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 23339981722993314}
   - component: {fileID: 65756583425195718}
   m_Layer: 0
-  m_Name: ButtonModel
+  m_Name: TestPressurePlat
   m_TagString: Checkable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -20,7 +20,7 @@ public class BasicMovement : MonoBehaviour
     private float lastVelX = 0.0f;
     private bool lastGrounded;
     private Rigidbody rb;
-    private bool grounded;
+    [HideInInspector] public bool grounded;
     private int groundedCount;
     RaycastHit hitCenter, hitFront, hitBack;
     private int groundBack, groundFront, groundCenter;
@@ -38,6 +38,8 @@ public class BasicMovement : MonoBehaviour
     private int facing = 1;
     private int lastFace = 1;
     public GameObject model;
+
+    [HideInInspector] public bool pushing;
    
 
     //Animation stuff, will use it later.
@@ -61,7 +63,7 @@ public class BasicMovement : MonoBehaviour
             // Alternatively, if the player is airborne, as long as the jump timer is not at max or run out, player can jump.
             // These might be redundant. Heads up.
             Movement();
-            if (grounded || (jumpTime > 0 && jumpTime < maxJumpTime))
+            if ((grounded || (jumpTime > 0 && jumpTime < maxJumpTime)) && !pushing)
             {
                 Jump();
             }
@@ -150,7 +152,8 @@ public class BasicMovement : MonoBehaviour
             }
 
             // This section just turns our model around to face the direction we're moving.
-            if (rb.velocity.x > 0.2f)
+            // If we're pushing/pulling an object we don't bother.
+            if (rb.velocity.x > 0.2f && !pushing)
             {
                 facing = 1;
                 if (lastFace == -1)
@@ -158,7 +161,7 @@ public class BasicMovement : MonoBehaviour
                     model.transform.rotation = Quaternion.Slerp(Quaternion.AngleAxis(180, Vector3.up), Quaternion.AngleAxis(0, Vector3.up), 1f);
                 }
             }
-            else if (rb.velocity.x < -0.2f)
+            else if (rb.velocity.x < -0.2f && !pushing)
             {
                 facing = -1;
                 if (lastFace == 1)
@@ -207,10 +210,13 @@ public class BasicMovement : MonoBehaviour
     void Movement()
     {
         //Grab left stick horizontal input. We won't use vertical (for now). We only multiply X axis by runspeed, and don't overwrite y axis.
-        //Can't move mid-air.
+        //Can't move mid-air. If we're pushing something, movespeed is cut in half.
         float moveHorizontal = Input.GetAxis("Horizontal");
 
-        movement = new Vector3(moveHorizontal * runSpeed, rb.velocity.y, 0.0f);
+        if (!pushing)
+            movement = new Vector3(moveHorizontal * runSpeed, rb.velocity.y, 0.0f);
+        else if (pushing)
+            movement = new Vector3(moveHorizontal * runSpeed * 0.5f, rb.velocity.y, 0.0f);
 
         if (grounded)
         {
