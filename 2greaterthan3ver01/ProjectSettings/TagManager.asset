@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Corrupt
+  - Fallthrough
+  - Pickup
+  - Pushable
+  - Checkable
+  - Button
   layers:
   - Default
   - TransparentFX
