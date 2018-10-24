@@ -23,12 +23,13 @@ public class Corruption : MonoBehaviour
     void Update()
         //This is my very quick fix for UI -- Lucas
     {
-        if (corrupting == true) {
+        /*if (corrupting == true) {
         Debug.Log(corrupting);
         corrOverlay.SetActive(true);
         } else {
         corrOverlay.SetActive(false);
-        }
+        }*/
+
         // This de-increments our fast corruption when the player isn't currently being corrupted.
         if (!corrupting && corrFast > 0)
             corrFast--;

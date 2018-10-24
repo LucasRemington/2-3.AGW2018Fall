@@ -79,7 +79,7 @@ public class GrabThrow : MonoBehaviour
     {
         //Because the trigger always activates, we need to check button inputs specifically.
         //Pushable objects need the button held down. Interactables otherwise just need a single tap.
-        if (Input.GetButton("XboxB") == true && !occupied && other.tag == "Pushable")
+        if (Input.GetButton("XboxB") == true && !occupied && other.tag == "Pushable" && rb.GetComponent<BasicMovement>().grounded)
         {
 
             // We already know this object is pushable, so we just double check that we're grounded so we can't push something mid-air.
@@ -125,13 +125,35 @@ public class GrabThrow : MonoBehaviour
             {
                 // Stick an interaction animation here. For now, it's instant, but later we'll program to wait for the animation to end.
 
-                // Set flag of the object to "true." We make sure the proper script is present first.
-                if (other.gameObject.GetComponent<Flag>())
+                // Like our corruption script, we loop through child objects to check if we're interacting with a terminal.
+                // Do NOT tag the terminal itself as a terminal, only a child object!!
+                var childCount = other.gameObject.transform.childCount;
+                var childTag = transform.tag;
+                for (var i = 0; i < childCount; ++i)
+                {
+                    var child = other.gameObject.transform.GetChild(i);
+                    childTag = child.tag;
+
+                    if (childTag == "Terminal")
+                        i = childCount + 1;
+                }
+
+                // If we are, we pause the player's movements and set the flag on the terminal to true.
+                // I also hate breaking an if statement into multiple lines, ugh ;~;
+                if (childTag == "Terminal" && rb.gameObject.GetComponent<BasicMovement>().grounded 
+                    && rb.gameObject.GetComponent<BasicMovement>().paused == false)
+                {
+                    other.gameObject.GetComponent<Terminal>().TerminalDialogue();
+                    rb.gameObject.GetComponent<BasicMovement>().paused = true;
+                }
+
+                    // Set flag of the object to "true." We make sure the proper script is present first.
+                    if (other.gameObject.GetComponent<Flag>() && childTag != "Terminal")
                 {
                     if (other.gameObject.GetComponent<Flag>().status == false)
                     other.gameObject.GetComponent<Flag>().status = true;
 
-                    else if (other.gameObject.GetComponent<Flag>().status == true)
+                    else if (other.gameObject.GetComponent<Flag>().status)
                         other.gameObject.GetComponent<Flag>().status = false;
                 }
             }
