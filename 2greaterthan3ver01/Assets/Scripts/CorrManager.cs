@@ -18,6 +18,8 @@ public class CorrManager : MonoBehaviour
     private float corruption;
     private Color tempColor;
 
+    private bool done;
+
     void Start ()
     {
         corrUI.sprite = corrBase;
@@ -47,10 +49,18 @@ public class CorrManager : MonoBehaviour
 
         // As alpha can not be directly set, we instead set a tempColor, change its alpha, and set our UI color to that.
         // It's really dumb and it sounds redundant, I know.
-        tempColor.a = (corruption / 100);
-        corrUI.color = tempColor;
+        if (!done)
+        {
+            tempColor.a = (corruption / 100);
+            corrUI.color = tempColor;
+        }
 
         if (corruption >= 100)
+        {
             corrUI.sprite = corrEnd;
+            done = true;
+            //temporary, just restart the scene upon death.
+            Application.LoadLevel(Application.loadedLevel);
+        }
 	}
 }
