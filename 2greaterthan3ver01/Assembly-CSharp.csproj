@@ -116,6 +116,7 @@
     <Compile Include="Assets\Cinemachine\Timeline\CinemachineTrack.cs" />
     <Compile Include="Assets\Scripts\BasicMovement.cs" />
     <Compile Include="Assets\Scripts\Button.cs" />
+    <Compile Include="Assets\Scripts\CinePlayerGrab.cs" />
     <Compile Include="Assets\Scripts\CorrManager.cs" />
     <Compile Include="Assets\Scripts\Corruption.cs" />
     <Compile Include="Assets\Scripts\Dialogue\Dialogue.cs" />
