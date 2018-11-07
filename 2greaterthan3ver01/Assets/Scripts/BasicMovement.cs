@@ -151,6 +151,33 @@ public class BasicMovement : MonoBehaviour
                 anim.SetBool("Grounded", false);
             }
 
+            if (pushing == true)
+            {
+                anim.SetBool("Pushing", true);
+            }
+            else
+            {
+                anim.SetBool("Pushing", false);
+            }
+
+            if (rb.velocity.y > 0 && rb.velocity.y != 0)
+            {
+                anim.SetBool("MovingUp", true);
+                anim.SetBool("Falling", false);
+            } else if (rb.velocity.y == 0 && anim.GetBool("MovingUp"))
+            {
+                anim.SetBool("Falling", false);
+            }
+            else if (rb.velocity.y == 0 && anim.GetBool("Falling"))
+            {
+                anim.SetBool("MovingUp", false);
+            }
+            else
+            {
+                anim.SetBool("MovingUp", false);
+                anim.SetBool("Falling", true);
+            }
+
             // This section just turns our model around to face the direction we're moving.
             // If we're pushing/pulling an object we don't bother.
             if (rb.velocity.x > 0.2f && !pushing)
@@ -203,7 +230,7 @@ public class BasicMovement : MonoBehaviour
         else if ((jumpTime > 0 && jumpTime < maxJumpTime) && rb.velocity.y > 0 && (Input.GetButton("XboxA") == true) && !jumpReleased)
         {
             rb.AddForce(transform.up * (jumpForce / 2), ForceMode.Impulse);
-            //anim.SetTrigger("Jump");
+            
         }
     }
 
@@ -223,12 +250,12 @@ public class BasicMovement : MonoBehaviour
             rb.velocity = movement;
             if (moveHorizontal != 0.0f)
             {
-                anim.SetBool("Running", true);
+                anim.SetBool("MovingHorizontal", true);
                 //Idea for future: when animating, multiply animation speed by moveHorizontal, since that's a 0 to 1 scale
             }
             else
             {
-                anim.SetBool("Running", false);
+                anim.SetBool("MovingHorizontal", false);
             }
         }
         else
