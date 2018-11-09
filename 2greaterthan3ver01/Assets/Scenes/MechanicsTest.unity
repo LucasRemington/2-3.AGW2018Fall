@@ -199,7 +199,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &154300936
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1354,8 +1354,8 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1481418692}
-  m_LocalRotation: {x: 0.07762925, y: 0.000004650422, z: -0.00000036210147, w: 0.99698234}
-  m_LocalPosition: {x: -1.255, y: 4.14, z: -25.5}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1546,6 +1546,7 @@ MonoBehaviour:
     - See, this is but a test. I highly doubt you'll be able to pass it.
     - In fact, this text probably won't pass a quality test itself!
     - So heck off, nerd.
+  respawnLoc: {fileID: 179495040}
 --- !u!114 &1556868232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2081,7 +2082,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4197609538892418, guid: 82898a7c2799ff041a479bd779d0c3f7, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 4.14
+      value: 4.1400003
       objectReference: {fileID: 0}
     - target: {fileID: 4197609538892418, guid: 82898a7c2799ff041a479bd779d0c3f7, type: 2}
       propertyPath: m_LocalPosition.z

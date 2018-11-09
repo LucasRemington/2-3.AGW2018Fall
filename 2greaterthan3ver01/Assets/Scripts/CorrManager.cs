@@ -104,6 +104,7 @@ public class CorrManager : MonoBehaviour
         yield return new WaitForSeconds(respTime);
         Instantiate(plPrefab, respawnLoc.transform);
         corruption = 0;
+        corrAnim.SetBool("CorrFull", false);
         done = false;
         respawning = false;
     }
