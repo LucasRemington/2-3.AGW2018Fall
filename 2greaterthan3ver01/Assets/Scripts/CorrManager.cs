@@ -64,7 +64,6 @@ public class CorrManager : MonoBehaviour
             {
                 var child = respawnLoc.transform.GetChild(i);
                 var childTag = child.tag;
-                Debug.Log("Looping through " + childCount + " times");
 
                 if (childTag == "Player")
                     player = child.gameObject;                

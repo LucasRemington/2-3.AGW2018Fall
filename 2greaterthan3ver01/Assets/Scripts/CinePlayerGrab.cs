@@ -34,7 +34,6 @@ public class CinePlayerGrab : MonoBehaviour
             {
                 var child = respawnLoc.transform.GetChild(i);
                 var childTag = child.tag;
-                Debug.Log("Looping through " + childCount + " times for Cinemachine");
 
                 if (childTag == "Player")
                     player = child.gameObject;
