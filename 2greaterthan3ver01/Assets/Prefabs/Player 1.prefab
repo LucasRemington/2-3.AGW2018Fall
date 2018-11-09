@@ -267,6 +267,7 @@ GameObject:
   - component: {fileID: 64674317584073918}
   - component: {fileID: 114260474409555086}
   - component: {fileID: 54409750343540184}
+  - component: {fileID: 114367768861674588}
   m_Layer: 0
   m_Name: Player 1
   m_TagString: Player
@@ -543,7 +544,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1435994838422982}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.26, y: 0.14, z: 0}
+  m_LocalPosition: {x: -3.3, y: 0.13999999, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4589939829374454}
@@ -591,7 +592,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1456953237799094}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.219, y: -0.99, z: 0}
+  m_LocalPosition: {x: -0.4, y: -0.99, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 4035138658686672}
@@ -786,7 +787,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1476902532531418}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.263, y: -0.99, z: 0}
+  m_LocalPosition: {x: 0.4, y: -0.99, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 4035138658686672}
@@ -825,7 +826,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1549065038934528}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.021, y: -0.99, z: 0}
+  m_LocalPosition: {x: 0, y: -0.99, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 4035138658686672}
@@ -1195,9 +1196,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbb2e2d48f7cd2045a9764b9b6ab9f81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  corrCap: 5
+  corrCap: 60
   corrSlow: 0
   corrFast: 0
+  corrOverlay: {fileID: 0}
 --- !u!114 &114260474409555086
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1213,16 +1215,24 @@ MonoBehaviour:
   jumpForce: 4.5
   airMoveForce: 4.5
   paused: 0
-  speedCap: 15
-  grounded: 0
   coyoteTime: 10
   maxJumpTime: 8
   castFront: {fileID: 1476902532531418}
   castBack: {fileID: 1456953237799094}
   castCenter: {fileID: 1549065038934528}
   model: {fileID: 1435994838422982}
-  pushing: 0
   anim: {fileID: 95109884320717568}
+--- !u!114 &114367768861674588
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1435994838422982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ffda05ccf44b9049a07876e9320e2c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114505600494094028
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: CarryingMask
+  m_Mask: 01000000000000000000000000000000000000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Group13388
+    m_Weight: 1
+  - m_Path: Left Leg
+    m_Weight: 1
+  - m_Path: Left Leg/Bone015
+    m_Weight: 1
+  - m_Path: Left Leg/Bone016
+    m_Weight: 1
+  - m_Path: Left Leg/Bone016/Bone017
+    m_Weight: 1
+  - m_Path: Left Leg/Bone016/Bone017/Bone018
+    m_Weight: 1
+  - m_Path: Right Leg
+    m_Weight: 1
+  - m_Path: Right Leg/Bone020
+    m_Weight: 1
+  - m_Path: Right Leg/Bone020/Bone021
+    m_Weight: 1
+  - m_Path: Right Leg/Bone020/Bone021/Bone022
+    m_Weight: 1
+  - m_Path: Right Leg/Bone020/Bone021/Bone022/Bone023
+    m_Weight: 1
+  - m_Path: Spine
+    m_Weight: 1
+  - m_Path: Spine/Torso
+    m_Weight: 1
+  - m_Path: Spine/Torso/Bone003
+    m_Weight: 1
+  - m_Path: Spine/Torso/Bone003/Head
+    m_Weight: 1
+  - m_Path: Spine/Torso/Bone003/Head/Bone005
+    m_Weight: 1
+  - m_Path: Spine/Torso/Left Arm
+    m_Weight: 1
+  - m_Path: Spine/Torso/Left Arm/Bone007
+    m_Weight: 1
+  - m_Path: Spine/Torso/Left Arm/Bone007/Bone008
+    m_Weight: 1
+  - m_Path: Spine/Torso/Left Arm/Bone007/Bone008/Bone009
+    m_Weight: 1
+  - m_Path: Spine/Torso/Right Arm
+    m_Weight: 1
+  - m_Path: Spine/Torso/Right Arm/Bone011
+    m_Weight: 1
+  - m_Path: Spine/Torso/Right Arm/Bone011/Bone012
+    m_Weight: 1
+  - m_Path: Spine/Torso/Right Arm/Bone011/Bone012/Bone013
+    m_Weight: 1

@@ -370,12 +370,14 @@
     <Compile Include="Assets\Scripts\CinePlayerGrab.cs" />
     <Compile Include="Assets\Scripts\CorrManager.cs" />
     <Compile Include="Assets\Scripts\Corruption.cs" />
+    <Compile Include="Assets\Scripts\CrateSpawner.cs" />
     <Compile Include="Assets\Scripts\Dialogue\Dialogue.cs" />
     <Compile Include="Assets\Scripts\Dialogue\DiaManager.cs" />
     <Compile Include="Assets\Scripts\Dialogue\Terminal.cs" />
     <Compile Include="Assets\Scripts\Door.cs" />
     <Compile Include="Assets\Scripts\Flag.cs" />
     <Compile Include="Assets\Scripts\GrabThrow.cs" />
+    <Compile Include="Assets\Scripts\Lucas_DialogueSprite.cs" />
     <Compile Include="Assets\Scripts\PressurePlate.cs" />
   </ItemGroup>
   <ItemGroup>

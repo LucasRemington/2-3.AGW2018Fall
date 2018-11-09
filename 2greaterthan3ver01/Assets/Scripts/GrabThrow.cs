@@ -20,6 +20,8 @@ public class GrabThrow : MonoBehaviour
     //Facing is used for throw direction.
     private int facing;
 
+    public Animator anim;
+
     void Start ()
     {
         //To save typing, we grab the rigidbody component and interaction trigger once here.
@@ -35,6 +37,23 @@ public class GrabThrow : MonoBehaviour
 	
 	void Update ()
     {
+        if (occupied == true)
+        {
+            anim.SetLayerWeight(1, 1f);
+            anim.SetBool("Carrying", true);
+        } else
+        {
+            anim.SetLayerWeight(1, 0f);
+            anim.SetBool("Carrying", false);
+        }
+
+        if (rb.gameObject.GetComponent<BasicMovement>().pushing == true) {
+            anim.SetBool("Pushing", true);
+            } else
+        {
+            anim.SetBool("Pushing", false);
+        }
+        
         //This little chunk here is literally just so that we don't release something as soon as we pick it up.
         if (Input.GetButtonUp("XboxB") == true)
             canUse = true;
@@ -56,6 +75,7 @@ public class GrabThrow : MonoBehaviour
                 //Throw our object. First we make it unkinematic so physics apply, then add the impulse force. 
                 //Finally, remove our occupied and held flags as well as restore its collider.
                 held.GetComponent<Rigidbody>().isKinematic = false;
+                //anim.SetTrigger("Throw");
 
                 if (Input.GetAxis("Vertical") != 0)
                     held.GetComponent<Rigidbody>().AddForce(new Vector3(0f, (Input.GetAxisRaw("Vertical")) * 2) * throwStrength, ForceMode.Impulse);
@@ -167,7 +187,7 @@ public class GrabThrow : MonoBehaviour
             if (other.tag == "Pushable")
             {
                 Debug.Log("Release");
-                other.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+                other.gameObject.GetComponent<Rigidbody>().isKinematic = false;
                 rb.gameObject.GetComponent<BasicMovement>().pushing = false;
 
                 //Destroy fixed joint.

@@ -64,13 +64,31 @@ public class BasicMovement : MonoBehaviour
     {
         if (!paused)
         {
+            if (rb.velocity.x > 0)
+            {
+                anim.SetBool("MovingHorizontal", true);
+            } else
+            {
+                anim.SetBool("MovingHorizontal", false);
+            }
+            if (rb.velocity.y >= 0)
+            {
+                anim.SetBool("MovingUp", true);
+                anim.SetBool("Falling", false);
+            } else
+            {
+                anim.SetBool("MovingUp", false);
+                anim.SetBool("Falling", true);
+            }
+
+
             // If the player is grounded and has released the jump button since their last jump, we can leave the ground.
             // Alternatively, if the player is airborne, as long as the jump timer is not at max or run out, player can jump.
             // These might be redundant. Heads up.
             Movement();
             if ((grounded || (jumpTime > 0 && jumpTime < maxJumpTime)) && !pushing)
             {
-                Jump();
+                Jump(); 
             }
 
             // Once we release the jump button we can jump again. This prevents infinite jumping just by holding down Jump.
@@ -151,6 +169,8 @@ public class BasicMovement : MonoBehaviour
             if (grounded == true)
             {
                 anim.SetBool("Grounded", true);
+                anim.SetBool("Falling", false);
+                anim.SetBool("MovingUp", false);
             } else
             {
                 anim.SetBool("Grounded", false);
@@ -240,12 +260,12 @@ public class BasicMovement : MonoBehaviour
             rb.velocity = movement;
             if (moveHorizontal != 0.0f)
             {
-                anim.SetBool("Running", true);
+                anim.SetBool("MovingHorizontal", true);
                 //Idea for future: when animating, multiply animation speed by moveHorizontal, since that's a 0 to 1 scale
             }
             else
             {
-                anim.SetBool("Running", false);
+                anim.SetBool("MovingHorizontal", false);
             }
         }
         else
