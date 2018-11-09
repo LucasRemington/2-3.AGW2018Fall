@@ -10,6 +10,7 @@ TagManager:
   - Pushable
   - Checkable
   - Button
+  - Terminal
   layers:
   - Default
   - TransparentFX

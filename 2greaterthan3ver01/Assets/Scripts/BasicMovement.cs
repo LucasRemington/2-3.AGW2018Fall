@@ -15,14 +15,18 @@ public class BasicMovement : MonoBehaviour
     //Setting up the flag for being paused; we don't want to move if we're paused.
     [HideInInspector] public bool paused = false;
 
-    //Used in jumping.
-    private float lastVel = 0.0f;
+    // Helps to cap speed when running or jumping. Unity collision is weird. 
+    private float lastVelY = 0.0f;
     private float lastVelX = 0.0f;
-    private bool lastGrounded;
+    public float speedCap;
+
+   // private bool lastGrounded;
+
     private Rigidbody rb;
+
+    //Jumping shenanigans, I know there's a lot.
     [HideInInspector] public bool grounded;
     private int groundedCount;
-    RaycastHit hitCenter, hitFront, hitBack;
     private int groundBack, groundFront, groundCenter;
     public float coyoteTime = 20f;
     private float coyote;
@@ -32,6 +36,7 @@ public class BasicMovement : MonoBehaviour
 
     //For the Raycast, we want to cast twice, from the front and from the back of the player.
     public GameObject castFront, castBack, castCenter;
+    RaycastHit hitCenter, hitFront, hitBack;
     private float groundDistFront, groundDistBack, groundDistCenter;
 
     //What direction is the player facing? -1 is left, 1 is right. Grab the model, too.
@@ -153,7 +158,7 @@ public class BasicMovement : MonoBehaviour
 
             // This section just turns our model around to face the direction we're moving.
             // If we're pushing/pulling an object we don't bother.
-            if (rb.velocity.x > 0.2f && !pushing)
+            if (rb.velocity.x > 0f && !pushing)
             {
                 facing = 1;
                 if (lastFace == -1)
@@ -161,7 +166,7 @@ public class BasicMovement : MonoBehaviour
                     model.transform.rotation = Quaternion.Slerp(Quaternion.AngleAxis(180, Vector3.up), Quaternion.AngleAxis(0, Vector3.up), 1f);
                 }
             }
-            else if (rb.velocity.x < -0.2f && !pushing)
+            else if (rb.velocity.x < 0f && !pushing)
             {
                 facing = -1;
                 if (lastFace == 1)
@@ -170,14 +175,26 @@ public class BasicMovement : MonoBehaviour
                 }
             }
 
+            SpeedCap();
 
             // This must be the last line in Update(). This keeps track of the last frame of velocity.
             // It's fully possibly these will go completely unused, and that's okay. This is leftover code, just in case.
-            lastVel = rb.velocity.y;
+            lastVelY = rb.velocity.y;
+            lastVelX = rb.velocity.x;
             lastFace = facing;
-            lastGrounded = grounded;
+            //lastGrounded = grounded;
         }
     }
+
+    void SpeedCap()
+    {
+        if (lastVelX > runSpeed || lastVelX < -runSpeed)
+            rb.velocity = new Vector3(runSpeed * facing, rb.velocity.y, 0);
+
+        if (lastVelY > speedCap)
+            rb.velocity = new Vector3(rb.velocity.x, speedCap, 0);
+    }
+
 
     void Jump()
     {
