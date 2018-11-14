@@ -5,14 +5,24 @@ using UnityEngine;
 public class Terminal : MonoBehaviour
 {
     public Dialogue dialogue;
+    public Animator anim;
+    public BasicMovement baseMove;
+    public Animator playerAnim;
+
+    private void Awake()
+    {
+        anim = GetComponentInChildren<Animator>();
+    }
 
     void Update()
     {
-        /*if (gameObject.GetComponent<Flag>().status)
+        if (baseMove.paused == true)
         {
-            TerminalDialogue();
-            gameObject.GetComponent<Flag>().status = false;
-        }*/
+            anim.SetBool("Active", true);
+        } else
+        {
+            anim.SetBool("Active", false);
+        }
     }
     public void TerminalDialogue()
     {

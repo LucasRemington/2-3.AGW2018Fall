@@ -42,6 +42,7 @@ public class Button : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         gameObject.GetComponent<Flag>().status = true;
+        Debug.Log("touched");
     }
 
     private void OnTriggerExit(Collider other)
