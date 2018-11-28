@@ -299,9 +299,6 @@ GameObject:
   - component: {fileID: 65746973798672658}
   - component: {fileID: 136123999289955744}
   - component: {fileID: 136562037454248830}
-  - component: {fileID: 136690047785722082}
-  - component: {fileID: 136406011326815306}
-  - component: {fileID: 136680846264196230}
   - component: {fileID: 114071538203582082}
   - component: {fileID: 54015648648324320}
   m_Layer: 0
@@ -672,7 +669,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1713072679165278}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.00999999, y: 0.14, z: 0}
+  m_LocalPosition: {x: 0, y: 0.14, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4856624929635246}
@@ -1144,7 +1141,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 120
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!65 &65106408474842114
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -1213,13 +1210,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runSpeed: 6
-  jumpForce: 4
+  jumpForce: 2.6
   airMoveForce: 8
   paused: 0
-  speedCap: 12
+  speedCap: 10
   grounded: 0
   coyoteTime: 10
   maxJumpTime: 8
+  gravMult: 2.5
   castFront: {fileID: 1177694644560708}
   castBack: {fileID: 1557396894145196}
   castCenter: {fileID: 1982160025791626}
@@ -1237,8 +1235,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db93e27bbc9804546b27db1f1fbafe51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  throwStrength: 40
+  throwStrength: 35
   holdPoint: {fileID: 4379237422837718}
+  occupied: 0
   held: {fileID: 0}
   check: {fileID: 0}
 --- !u!136 &136123999289955744
@@ -1254,19 +1253,6 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 2
   m_Center: {x: 0.314, y: -0.997, z: 0}
---- !u!136 &136406011326815306
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1713072679165278}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.005
-  m_Height: 1
-  m_Direction: 2
-  m_Center: {x: 0.315, y: 0.996, z: 0}
 --- !u!136 &136451865829116274
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -1293,32 +1279,6 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 2
   m_Center: {x: -0.314, y: -0.997, z: 0}
---- !u!136 &136680846264196230
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1713072679165278}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.005
-  m_Height: 0.634
-  m_Direction: 0
-  m_Center: {x: 0, y: -0.997, z: 0}
---- !u!136 &136690047785722082
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1713072679165278}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.005
-  m_Height: 1
-  m_Direction: 2
-  m_Center: {x: -0.314, y: 0.996, z: 0}
 --- !u!137 &137988812540454020
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

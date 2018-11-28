@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 23599116805575690}
   - component: {fileID: 65845484221502280}
   - component: {fileID: 54477724199374076}
-  - component: {fileID: 114684895775209022}
+  - component: {fileID: 114943742581972650}
   m_Layer: 0
   m_Name: CrateTest
   m_TagString: Pickup
@@ -156,6 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 1290852315290216, guid: f51c847fc0d9600439384b0420be97c8, type: 2}
+  respawnLoc: {fileID: 0}
 --- !u!114 &114570748519015338
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -171,7 +172,7 @@ MonoBehaviour:
   objectOne: {fileID: 0}
   objectTwo: {fileID: 0}
   objectThree: {fileID: 0}
---- !u!114 &114684895775209022
+--- !u!114 &114943742581972650
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -179,6 +180,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1452166595544726}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ffda05ccf44b9049a07876e9320e2c0, type: 3}
+  m_Script: {fileID: 11500000, guid: a42b3327fa85d0e4e8913cc0919fbbdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gravMult: 2.1

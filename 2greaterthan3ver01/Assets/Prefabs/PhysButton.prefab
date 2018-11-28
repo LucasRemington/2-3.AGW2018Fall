@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 114734413937408418}
   m_Layer: 0
   m_Name: Button
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -235,7 +235,7 @@ GameObject:
   - component: {fileID: 65615975012384206}
   m_Layer: 0
   m_Name: Latch
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -291,8 +291,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1979561204678492}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.048, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.1, z: 0.8}
+  m_LocalPosition: {x: -0, y: 0.092, z: 0}
+  m_LocalScale: {x: 0.14157976, y: 0.043418184, z: 0.14157976}
   m_Children: []
   m_Father: {fileID: 4917470314123634}
   m_RootOrder: 3
@@ -386,8 +386,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1110280409398674}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.29605, z: 0}
-  m_LocalScale: {x: 0.67, y: 0.21784465, z: 0.67}
+  m_LocalPosition: {x: 0.0000018328, y: 0.2959, z: 0}
+  m_LocalScale: {x: 0.6499, y: 0.21130931, z: 0.6499}
   m_Children:
   - {fileID: 4888928718221636}
   m_Father: {fileID: 4917470314123634}
@@ -444,7 +444,7 @@ Transform:
   m_GameObject: {fileID: 1853193530999138}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.52, z: 0}
-  m_LocalScale: {x: 1.2632421, y: 0.033425387, z: 1.2632421}
+  m_LocalScale: {x: 1.2632421, y: 0.05, z: 1.2632421}
   m_Children: []
   m_Father: {fileID: 4614050655345602}
   m_RootOrder: 0
@@ -455,8 +455,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1944262665291058}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.28, y: 1.502, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: 0.00025226173, w: 1}
+  m_LocalPosition: {x: 6.8107376, y: 0.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4638769891842456}
@@ -466,7 +466,7 @@ Transform:
   - {fileID: 4614050655345602}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.029000001}
 --- !u!4 &4939205805116102
 Transform:
   m_ObjectHideFlags: 1
@@ -914,7 +914,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 120
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!65 &65001322652459938
 BoxCollider:
   m_ObjectHideFlags: 1

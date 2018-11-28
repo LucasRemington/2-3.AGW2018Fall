@@ -41,12 +41,14 @@ public class Button : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        gameObject.GetComponent<Flag>().status = true;
+        Debug.Log(other.gameObject.tag);
+        if (other.tag == "Button")
+            gameObject.GetComponent<Flag>().status = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (hold)
+        if (hold && other.tag == "Button")
             gameObject.GetComponent<Flag>().status = false;
     }
 }

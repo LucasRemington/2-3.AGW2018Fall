@@ -126,6 +126,7 @@
     <Compile Include="Assets\Scripts\Door.cs" />
     <Compile Include="Assets\Scripts\Flag.cs" />
     <Compile Include="Assets\Scripts\GrabThrow.cs" />
+    <Compile Include="Assets\Scripts\ObjectGrav.cs" />
     <Compile Include="Assets\Scripts\PressurePlate.cs" />
     <None Include="Assets\Cinemachine\ReleaseNotes.txt" />
     <Reference Include="UnityEditor.StandardEvents">

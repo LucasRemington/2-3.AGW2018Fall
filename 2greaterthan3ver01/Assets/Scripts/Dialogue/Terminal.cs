@@ -24,13 +24,17 @@ public class Terminal : MonoBehaviour
             }
         }
     }
-    public void TerminalDialogue()
+    public void TerminalDialogue(bool occupied)
     {
         // We locally create a position where the player is now. This allows us to move the respawn location, the player's parent object,
         // without moving the player's position as well. Then, start dialogue.
-        var tempPosition = player.transform.position;
-        respawnLoc.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, respawnLoc.position.z);
-        player.transform.position = tempPosition;
-        FindObjectOfType<DiaManager>().StartDialogue(dialogue);
+
+        if (!occupied)
+        {
+            var tempPosition = player.transform.position;
+            respawnLoc.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, respawnLoc.position.z);
+            player.transform.position = tempPosition;
+            FindObjectOfType<DiaManager>().StartDialogue(dialogue);
+        }
     }
 }

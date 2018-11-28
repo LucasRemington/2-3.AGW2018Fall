@@ -33,6 +33,8 @@ public class BasicMovement : MonoBehaviour
     public float maxJumpTime = 20f;
     private float jumpTime;
     private bool jumpReleased = true;
+    public float gravMult;
+
 
     //For the Raycast, we want to cast twice, from the front and from the back of the player.
     public GameObject castFront, castBack, castCenter;
@@ -174,6 +176,13 @@ public class BasicMovement : MonoBehaviour
                     model.transform.rotation = Quaternion.Slerp(Quaternion.AngleAxis(0, Vector3.up), Quaternion.AngleAxis(180, Vector3.up), 1f);
                 }
             }
+
+            // While falling, multiply gravity for a snappier jump.
+            if (rb.velocity.y < 0 && !grounded)
+            {
+                rb.velocity += Vector3.up * Physics.gravity.y * (gravMult - 1) * Time.deltaTime;
+            }
+
 
             SpeedCap();
 

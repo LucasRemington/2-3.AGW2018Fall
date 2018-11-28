@@ -9,7 +9,7 @@ public class GrabThrow : MonoBehaviour
     public Transform holdPoint;
 
     //Bool for if we're holding something or not, we are able to interact, and a reference to what we're holding.
-    private bool occupied;
+    [HideInInspector] public bool occupied;
     private bool canUse;
     public GameObject held;
 
@@ -90,6 +90,7 @@ public class GrabThrow : MonoBehaviour
                 //We also call the movement script's pushing bool.
                 rb.gameObject.GetComponent<BasicMovement>().pushing = true;
                 other.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+                occupied = true;
 
                 // We create a fixed joint while the button is being held down. This allows us to pull it.
                 if (!rb.gameObject.GetComponent<FixedJoint>())
@@ -143,7 +144,7 @@ public class GrabThrow : MonoBehaviour
                 if (childTag == "Terminal" && rb.gameObject.GetComponent<BasicMovement>().grounded 
                     && rb.gameObject.GetComponent<BasicMovement>().paused == false)
                 {
-                    other.gameObject.GetComponent<Terminal>().TerminalDialogue();
+                    other.gameObject.GetComponent<Terminal>().TerminalDialogue(occupied);
                     rb.gameObject.GetComponent<BasicMovement>().paused = true;
                 }
 
