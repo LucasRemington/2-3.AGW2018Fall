@@ -31,6 +31,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< HEAD
 --- !u!1 &1557748681175798
 GameObject:
   m_ObjectHideFlags: 0
@@ -64,6 +65,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+=======
+>>>>>>> 035753c52d799f19a5d60069c86e9e6e953326dd
 --- !u!1 &1692431910866858
 GameObject:
   m_ObjectHideFlags: 0
@@ -79,6 +82,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< HEAD
 --- !u!4 &4014827921006318
 Transform:
   m_ObjectHideFlags: 1
@@ -92,6 +96,8 @@ Transform:
   m_Father: {fileID: 4398524257276864}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+>>>>>>> 035753c52d799f19a5d60069c86e9e6e953326dd
 --- !u!4 &4110411734482212
 Transform:
   m_ObjectHideFlags: 1
@@ -103,7 +109,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4398524257276864}
+<<<<<<< HEAD
   m_RootOrder: 2
+=======
+  m_RootOrder: 0
+>>>>>>> 035753c52d799f19a5d60069c86e9e6e953326dd
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4398524257276864
 Transform:
@@ -112,15 +122,22 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1214076963806398}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+<<<<<<< HEAD
   m_LocalPosition: {x: 45.55, y: 0, z: 1.8456764}
   m_LocalScale: {x: 1.51559, y: 2.4145, z: 0.50712}
   m_Children:
   - {fileID: 4014827921006318}
   - {fileID: 4750408607108332}
+=======
+  m_LocalPosition: {x: 37.17785, y: -0.4699993, z: -18.52119}
+  m_LocalScale: {x: 1.5155942, y: 2.414501, z: 0.50712025}
+  m_Children:
+>>>>>>> 035753c52d799f19a5d60069c86e9e6e953326dd
   - {fileID: 4110411734482212}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!4 &4750408607108332
 Transform:
   m_ObjectHideFlags: 1
@@ -134,6 +151,8 @@ Transform:
   m_Father: {fileID: 4398524257276864}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+>>>>>>> 035753c52d799f19a5d60069c86e9e6e953326dd
 --- !u!23 &23234696683541240
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -183,6 +202,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1214076963806398}
   m_Material: {fileID: 0}
+<<<<<<< HEAD
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
@@ -206,6 +226,13 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+=======
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+>>>>>>> 035753c52d799f19a5d60069c86e9e6e953326dd
 --- !u!114 &114256427272546890
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -218,6 +245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
+<<<<<<< HEAD
     sentences:
     - Very clever.
     - 'However, I have already adapted to your adaptation: this next block is too
@@ -226,6 +254,9 @@ MonoBehaviour:
   anim: {fileID: 0}
   baseMove: {fileID: 0}
   playerAnim: {fileID: 0}
+=======
+    sentences: []
+>>>>>>> 035753c52d799f19a5d60069c86e9e6e953326dd
 --- !u!114 &114911579940109462
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -241,6 +272,7 @@ MonoBehaviour:
   objectOne: {fileID: 0}
   objectTwo: {fileID: 0}
   objectThree: {fileID: 0}
+<<<<<<< HEAD
 --- !u!212 &212199784204839358
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -333,3 +365,5 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+=======
+>>>>>>> 035753c52d799f19a5d60069c86e9e6e953326dd

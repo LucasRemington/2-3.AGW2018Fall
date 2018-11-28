@@ -544,7 +544,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1435994838422982}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+<<<<<<< HEAD
   m_LocalPosition: {x: 0, y: 0, z: 0}
+=======
+  m_LocalPosition: {x: -3.3, y: 0.13999999, z: 0}
+>>>>>>> 035753c52d799f19a5d60069c86e9e6e953326dd
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4589939829374454}
@@ -1199,6 +1203,7 @@ MonoBehaviour:
   corrCap: 60
   corrSlow: 0
   corrFast: 0
+  corrOverlay: {fileID: 0}
 --- !u!114 &114260474409555086
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1214,15 +1219,17 @@ MonoBehaviour:
   jumpForce: 4.5
   airMoveForce: 4.5
   paused: 0
+<<<<<<< HEAD
   speedCap: 0
   grounded: 0
+=======
+>>>>>>> 035753c52d799f19a5d60069c86e9e6e953326dd
   coyoteTime: 10
   maxJumpTime: 8
   castFront: {fileID: 1476902532531418}
   castBack: {fileID: 1456953237799094}
   castCenter: {fileID: 1549065038934528}
   model: {fileID: 1435994838422982}
-  pushing: 0
   anim: {fileID: 95109884320717568}
 --- !u!114 &114367768861674588
 MonoBehaviour:

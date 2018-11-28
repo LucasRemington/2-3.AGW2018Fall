@@ -1,6 +1,10 @@
 OSXStandalone
 PlayerPath?
+<<<<<<< HEAD
 D:/Users/lreming1/Downloads/2-3.AGW2018Fall/2-3.AGW2018Fall/Macbuild.app
+=======
+D:/Users/lreming1/Documents/Github/2-3.AGW2018Fall/MacBuild.app
+>>>>>>> 035753c52d799f19a5d60069c86e9e6e953326dd
 SceneListBegin?
 Assets/Scenes/Level1.unity
 SceneListEnd?
