@@ -8,10 +8,8 @@ public class Corruption : MonoBehaviour
     // Every time corrFast charges to full, corrSlow increments. If corrSlow hits 100, player dies.
     // corrCap determines what corrFast needs to be full.
     public int corrCap;
-    [HideInInspector] public int corrSlow, corrFast;
+    public int corrSlow, corrFast;
     private bool corrupting;
-    //Part of UI fix -- Lucas
-    public GameObject corrOverlay;
 	
 	void Start ()
     {
@@ -21,14 +19,7 @@ public class Corruption : MonoBehaviour
 
 
     void Update()
-        //This is my very quick fix for UI -- Lucas
     {
-        if (corrupting == true) {
-        Debug.Log(corrupting);
-        corrOverlay.SetActive(true);
-        } else {
-        corrOverlay.SetActive(false);
-        }
         // This de-increments our fast corruption when the player isn't currently being corrupted.
         if (!corrupting && corrFast > 0)
             corrFast--;

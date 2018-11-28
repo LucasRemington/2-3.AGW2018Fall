@@ -20,6 +20,8 @@ public class GrabThrow : MonoBehaviour
     //Facing is used for throw direction.
     private int facing;
 
+    public Animator anim;
+
     void Start ()
     {
         //To save typing, we grab the rigidbody component and interaction trigger once here.
@@ -35,6 +37,23 @@ public class GrabThrow : MonoBehaviour
 	
 	void Update ()
     {
+        if (occupied == true)
+        {
+            anim.SetLayerWeight(1, 1f);
+            anim.SetBool("Carrying", true);
+        } else
+        {
+            anim.SetLayerWeight(1, 0f);
+            anim.SetBool("Carrying", false);
+        }
+
+        if (rb.gameObject.GetComponent<BasicMovement>().pushing == true) {
+            anim.SetBool("Pushing", true);
+            } else
+        {
+            anim.SetBool("Pushing", false);
+        }
+        
         //This little chunk here is literally just so that we don't release something as soon as we pick it up.
         if (Input.GetButtonUp("XboxB") == true)
             canUse = true;
@@ -56,6 +75,7 @@ public class GrabThrow : MonoBehaviour
                 //Throw our object. First we make it unkinematic so physics apply, then add the impulse force. 
                 //Finally, remove our occupied and held flags as well as restore its collider.
                 held.GetComponent<Rigidbody>().isKinematic = false;
+                //anim.SetTrigger("Throw");
 
                 if (Input.GetAxis("Vertical") != 0)
                     held.GetComponent<Rigidbody>().AddForce(new Vector3(0f, (Input.GetAxisRaw("Vertical")) * 2) * throwStrength, ForceMode.Impulse);
@@ -79,16 +99,29 @@ public class GrabThrow : MonoBehaviour
     {
         //Because the trigger always activates, we need to check button inputs specifically.
         //Pushable objects need the button held down. Interactables otherwise just need a single tap.
-        if (Input.GetButton("XboxB") == true && !occupied && other.tag == "Pushable")
+        if (Input.GetButton("XboxB") == true && !occupied && other.tag == "Pushable" && rb.GetComponent<BasicMovement>().grounded)
         {
-            //Check for pushable objects.
-            if (other.tag == "Pushable")
+
+            // We already know this object is pushable, so we just double check that we're grounded so we can't push something mid-air.
+            if (rb.gameObject.GetComponent<BasicMovement>().grounded == true)
             {
                 //Setting kinematic to false allows it to move via physics. Once we release the interact button,
                 //turning kinematic back on means only scripts can move it.
+                //We also call the movement script's pushing bool.
+                rb.gameObject.GetComponent<BasicMovement>().pushing = true;
                 other.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+
+                // We create a fixed joint while the button is being held down. This allows us to pull it.
+                if (!rb.gameObject.GetComponent<FixedJoint>())
+                {
+                    var attach = rb.gameObject.AddComponent<FixedJoint>();
+                    attach.connectedBody = other.GetComponent<Rigidbody>();
+                    attach.enableCollision = true;
+                }
             }
         }
+
+
 
         if (Input.GetButtonDown("XboxB") == true && !occupied)
         {
@@ -105,29 +138,60 @@ public class GrabThrow : MonoBehaviour
                 canUse = false;
             }
 
+
+
             //Check for objects that can otherwise be used.
             if (other.tag == "Checkable" && !occupied)
             {
                 // Stick an interaction animation here. For now, it's instant, but later we'll program to wait for the animation to end.
 
-                // Set flag of the object to "true." We make sure the proper script is present first.
-                if (other.gameObject.GetComponent<Flag>())
+                // Like our corruption script, we loop through child objects to check if we're interacting with a terminal.
+                // Do NOT tag the terminal itself as a terminal, only a child object!!
+                var childCount = other.gameObject.transform.childCount;
+                var childTag = transform.tag;
+                for (var i = 0; i < childCount; ++i)
+                {
+                    var child = other.gameObject.transform.GetChild(i);
+                    childTag = child.tag;
+
+                    if (childTag == "Terminal")
+                        i = childCount + 1;
+                }
+
+                // If we are, we pause the player's movements and set the flag on the terminal to true.
+                // I also hate breaking an if statement into multiple lines, ugh ;~;
+                if (childTag == "Terminal" && rb.gameObject.GetComponent<BasicMovement>().grounded 
+                    && rb.gameObject.GetComponent<BasicMovement>().paused == false)
+                {
+                    other.gameObject.GetComponent<Terminal>().TerminalDialogue();
+                    rb.gameObject.GetComponent<BasicMovement>().paused = true;
+                }
+
+                    // Set flag of the object to "true." We make sure the proper script is present first.
+                    if (other.gameObject.GetComponent<Flag>() && childTag != "Terminal")
                 {
                     if (other.gameObject.GetComponent<Flag>().status == false)
                     other.gameObject.GetComponent<Flag>().status = true;
 
-                    else if (other.gameObject.GetComponent<Flag>().status == true)
+                    else if (other.gameObject.GetComponent<Flag>().status)
                         other.gameObject.GetComponent<Flag>().status = false;
                 }
             }
         }
+
+
 
         else if (Input.GetButton("XboxB") == false)
         {
             //Release pushable objects.
             if (other.tag == "Pushable")
             {
-                other.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+                Debug.Log("Release");
+                other.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+                rb.gameObject.GetComponent<BasicMovement>().pushing = false;
+
+                //Destroy fixed joint.
+                Destroy(rb.gameObject.GetComponent<FixedJoint>());
             }
         }
     }

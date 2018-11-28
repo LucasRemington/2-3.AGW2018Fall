@@ -15,14 +15,18 @@ public class BasicMovement : MonoBehaviour
     //Setting up the flag for being paused; we don't want to move if we're paused.
     [HideInInspector] public bool paused = false;
 
-    //Used in jumping.
-    private float lastVel = 0.0f;
+    // Helps to cap speed when running or jumping. Unity collision is weird. 
+    private float lastVelY = 0.0f;
     private float lastVelX = 0.0f;
-    private bool lastGrounded;
+    public float speedCap;
+
+   // private bool lastGrounded;
+
     private Rigidbody rb;
-    private bool grounded;
+
+    //Jumping shenanigans, I know there's a lot.
+    [HideInInspector] public bool grounded;
     private int groundedCount;
-    RaycastHit hitCenter, hitFront, hitBack;
     private int groundBack, groundFront, groundCenter;
     public float coyoteTime = 20f;
     private float coyote;
@@ -32,12 +36,15 @@ public class BasicMovement : MonoBehaviour
 
     //For the Raycast, we want to cast twice, from the front and from the back of the player.
     public GameObject castFront, castBack, castCenter;
+    RaycastHit hitCenter, hitFront, hitBack;
     private float groundDistFront, groundDistBack, groundDistCenter;
 
     //What direction is the player facing? -1 is left, 1 is right. Grab the model, too.
     private int facing = 1;
     private int lastFace = 1;
     public GameObject model;
+
+    [HideInInspector] public bool pushing;
    
 
     //Animation stuff, will use it later.
@@ -57,13 +64,31 @@ public class BasicMovement : MonoBehaviour
     {
         if (!paused)
         {
+            if (rb.velocity.x > 0)
+            {
+                anim.SetBool("MovingHorizontal", true);
+            } else
+            {
+                anim.SetBool("MovingHorizontal", false);
+            }
+            if (rb.velocity.y >= 0)
+            {
+                anim.SetBool("MovingUp", true);
+                anim.SetBool("Falling", false);
+            } else
+            {
+                anim.SetBool("MovingUp", false);
+                anim.SetBool("Falling", true);
+            }
+
+
             // If the player is grounded and has released the jump button since their last jump, we can leave the ground.
             // Alternatively, if the player is airborne, as long as the jump timer is not at max or run out, player can jump.
             // These might be redundant. Heads up.
             Movement();
-            if (grounded || (jumpTime > 0 && jumpTime < maxJumpTime))
+            if ((grounded || (jumpTime > 0 && jumpTime < maxJumpTime)) && !pushing)
             {
-                Jump();
+                Jump(); 
             }
 
             // Once we release the jump button we can jump again. This prevents infinite jumping just by holding down Jump.
@@ -144,13 +169,16 @@ public class BasicMovement : MonoBehaviour
             if (grounded == true)
             {
                 anim.SetBool("Grounded", true);
+                anim.SetBool("Falling", false);
+                anim.SetBool("MovingUp", false);
             } else
             {
                 anim.SetBool("Grounded", false);
             }
 
             // This section just turns our model around to face the direction we're moving.
-            if (rb.velocity.x > 0.2f)
+            // If we're pushing/pulling an object we don't bother.
+            if (rb.velocity.x > 0f && !pushing)
             {
                 facing = 1;
                 if (lastFace == -1)
@@ -158,7 +186,7 @@ public class BasicMovement : MonoBehaviour
                     model.transform.rotation = Quaternion.Slerp(Quaternion.AngleAxis(180, Vector3.up), Quaternion.AngleAxis(0, Vector3.up), 1f);
                 }
             }
-            else if (rb.velocity.x < -0.2f)
+            else if (rb.velocity.x < 0f && !pushing)
             {
                 facing = -1;
                 if (lastFace == 1)
@@ -167,14 +195,26 @@ public class BasicMovement : MonoBehaviour
                 }
             }
 
+            SpeedCap();
 
             // This must be the last line in Update(). This keeps track of the last frame of velocity.
             // It's fully possibly these will go completely unused, and that's okay. This is leftover code, just in case.
-            lastVel = rb.velocity.y;
+            lastVelY = rb.velocity.y;
+            lastVelX = rb.velocity.x;
             lastFace = facing;
-            lastGrounded = grounded;
+            //lastGrounded = grounded;
         }
     }
+
+    void SpeedCap()
+    {
+        if (lastVelX > runSpeed || lastVelX < -runSpeed)
+            rb.velocity = new Vector3(runSpeed * facing, rb.velocity.y, 0);
+
+        if (lastVelY > speedCap)
+            rb.velocity = new Vector3(rb.velocity.x, speedCap, 0);
+    }
+
 
     void Jump()
     {
@@ -207,22 +247,25 @@ public class BasicMovement : MonoBehaviour
     void Movement()
     {
         //Grab left stick horizontal input. We won't use vertical (for now). We only multiply X axis by runspeed, and don't overwrite y axis.
-        //Can't move mid-air.
+        //Can't move mid-air. If we're pushing something, movespeed is cut in half.
         float moveHorizontal = Input.GetAxis("Horizontal");
 
-        movement = new Vector3(moveHorizontal * runSpeed, rb.velocity.y, 0.0f);
+        if (!pushing)
+            movement = new Vector3(moveHorizontal * runSpeed, rb.velocity.y, 0.0f);
+        else if (pushing)
+            movement = new Vector3(moveHorizontal * runSpeed * 0.5f, rb.velocity.y, 0.0f);
 
         if (grounded)
         {
             rb.velocity = movement;
             if (moveHorizontal != 0.0f)
             {
-                anim.SetBool("Running", true);
+                anim.SetBool("MovingHorizontal", true);
                 //Idea for future: when animating, multiply animation speed by moveHorizontal, since that's a 0 to 1 scale
             }
             else
             {
-                anim.SetBool("Running", false);
+                anim.SetBool("MovingHorizontal", false);
             }
         }
         else
