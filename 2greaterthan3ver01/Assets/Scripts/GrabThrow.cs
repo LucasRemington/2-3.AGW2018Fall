@@ -85,11 +85,11 @@ public class GrabThrow : MonoBehaviour
             // We already know this object is pushable, so we just double check that we're grounded so we can't push something mid-air.
             if (rb.gameObject.GetComponent<BasicMovement>().grounded == true)
             {
-                //Setting kinematic to false allows it to move via physics. Once we release the interact button,
-                //turning kinematic back on means only scripts can move it.
+                // Rather than use kinematic movement to make the object impossible to move without grabbing it,
+                // instead, we increase and decrease the drag so grabbing it is more efficient.
                 //We also call the movement script's pushing bool.
                 rb.gameObject.GetComponent<BasicMovement>().pushing = true;
-                other.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+                other.gameObject.GetComponent<Rigidbody>().drag = 0.8f;
                 occupied = true;
 
                 // We create a fixed joint while the button is being held down. This allows us to pull it.
@@ -112,15 +112,17 @@ public class GrabThrow : MonoBehaviour
                 // Once we pick up an object, do the following: Disable collider, disable physics, move it to a specified point in the editor.
                 other.gameObject.GetComponent<Collider>().isTrigger = true;
                 other.gameObject.GetComponent<Rigidbody>().isKinematic = true;
-                    //ToDo for polish: Interpolate distance more smoothly over a short period of time so it doesn't just teleport.
+
+                //ToDo for polish: Interpolate distance more smoothly over a short period of time so it doesn't just teleport.
                 //other.gameObject.transform.position = Vector3.Lerp(other.gameObject.transform.position, holdPoint.position, 1);
                 held = other.gameObject;
                 occupied = true;
                 canUse = false;
             }
+        }
 
-
-
+        else if (Input.GetButtonDown("XboxX"))
+        {
             //Check for objects that can otherwise be used.
             if (other.tag == "Checkable" && !occupied)
             {
@@ -141,18 +143,18 @@ public class GrabThrow : MonoBehaviour
 
                 // If we are, we pause the player's movements and set the flag on the terminal to true.
                 // I also hate breaking an if statement into multiple lines, ugh ;~;
-                if (childTag == "Terminal" && rb.gameObject.GetComponent<BasicMovement>().grounded 
+                if (childTag == "Terminal" && rb.gameObject.GetComponent<BasicMovement>().grounded
                     && rb.gameObject.GetComponent<BasicMovement>().paused == false)
                 {
                     other.gameObject.GetComponent<Terminal>().TerminalDialogue(occupied);
                     rb.gameObject.GetComponent<BasicMovement>().paused = true;
                 }
 
-                    // Set flag of the object to "true." We make sure the proper script is present first.
-                    if (other.gameObject.GetComponent<Flag>() && childTag != "Terminal")
+                // Set flag of the object to "true." We make sure the proper script is present first.
+                if (other.gameObject.GetComponent<Flag>() && childTag != "Terminal")
                 {
                     if (other.gameObject.GetComponent<Flag>().status == false)
-                    other.gameObject.GetComponent<Flag>().status = true;
+                        other.gameObject.GetComponent<Flag>().status = true;
 
                     else if (other.gameObject.GetComponent<Flag>().status)
                         other.gameObject.GetComponent<Flag>().status = false;
@@ -160,16 +162,15 @@ public class GrabThrow : MonoBehaviour
             }
         }
 
-
-
         else if (Input.GetButton("XboxB") == false)
         {
             //Release pushable objects.
             if (other.tag == "Pushable")
             {
                 Debug.Log("Release");
-                other.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+                other.gameObject.GetComponent<Rigidbody>().drag = 100.0f;
                 rb.gameObject.GetComponent<BasicMovement>().pushing = false;
+                occupied = false;
 
                 //Destroy fixed joint.
                 Destroy(rb.gameObject.GetComponent<FixedJoint>());

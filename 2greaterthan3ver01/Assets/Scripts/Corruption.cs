@@ -9,7 +9,7 @@ public class Corruption : MonoBehaviour
     // corrCap determines what corrFast needs to be full.
     public int corrCap;
     public int corrSlow, corrFast;
-    private bool corrupting;
+    [HideInInspector] public bool corrupting;
 	
 	void Start ()
     {
@@ -21,8 +21,16 @@ public class Corruption : MonoBehaviour
     void Update()
     {
         // This de-increments our fast corruption when the player isn't currently being corrupted.
-        if (!corrupting && corrFast > 0)
+        if (!corrupting)
             corrFast--;
+        if (!corrupting && corrFast < corrCap * -2)
+        {
+            corrFast = 0;
+            corrSlow--;
+        }
+
+        if (corrSlow < 0)
+            corrSlow = 0;
 
 	}
 
@@ -50,7 +58,12 @@ public class Corruption : MonoBehaviour
 
             // Our fast corruption increments between 0 and its specified cap. After each loop, fast corruption is incremented.
             if (corrFast < corrCap)
+            {
+                if (corrFast < 0)
+                    corrFast = 0;
                 corrFast++;
+            }
+                
             else if (corrFast >= corrCap)
             {
                 corrSlow++;

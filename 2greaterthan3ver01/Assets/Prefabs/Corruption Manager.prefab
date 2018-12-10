@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1240856993060162}
+  m_IsPrefabAsset: 1
+--- !u!1 &1240856993060162
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4949565877806412}
+  - component: {fileID: 114458365960169078}
+  m_Layer: 0
+  m_Name: Corruption Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4949565877806412
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1240856993060162}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.2159803, y: 0.6964308, z: 5.8017793}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114458365960169078
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1240856993060162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 494f6eae65de3654e8231d44651bb49c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  corrBase: {fileID: 21300000, guid: b0b401520981a964386959c5375deb23, type: 3}
+  corrEnd: {fileID: 21300000, guid: 186032712dd90e54e88d7e93c591300b, type: 3}
+  corrAnim: {fileID: 0}
+  fastCorrAnim: {fileID: 0}
+  slowCorrAnim: {fileID: 0}
+  corrupting: 0
+  corrUI: {fileID: 0}
+  playerList: {fileID: 0}
+  player: {fileID: 0}
+  plPrefab: {fileID: 1406633660858166, guid: fe42d6bfc88b4d4438c73cb6fbe2edbc, type: 2}
+  corruption: 0
+  deathCount: 0
+  respTime: 3

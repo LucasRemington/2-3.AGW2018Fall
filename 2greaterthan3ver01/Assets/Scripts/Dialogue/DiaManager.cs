@@ -21,7 +21,7 @@ public class DiaManager : MonoBehaviour
         if (player == null)
             player = GameObject.FindGameObjectWithTag("Player");
 
-        if (Input.GetButtonDown("XboxB") && player.GetComponent<BasicMovement>().paused)
+        if ((Input.GetButtonDown("XboxX") || Input.GetButtonDown("XboxB") || Input.GetButtonDown("XboxA")) && player.GetComponent<BasicMovement>().paused)
         {
             DisplayNextSentence();
         }

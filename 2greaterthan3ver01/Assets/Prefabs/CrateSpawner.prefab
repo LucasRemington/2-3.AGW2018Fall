@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 54477724199374076}
   - component: {fileID: 114943742581972650}
   m_Layer: 0
-  m_Name: CrateTest
+  m_Name: Crate
   m_TagString: Pickup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

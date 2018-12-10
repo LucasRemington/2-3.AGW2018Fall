@@ -10,6 +10,12 @@ public class CorrManager : MonoBehaviour
     public Sprite corrBase, corrEnd;
     public Animator corrAnim;
 
+    //Used in the UI animations.
+    public Animator fastCorrAnim;
+    public Animator slowCorrAnim;
+    public bool corrupting;
+    private int fastCorr;
+
     public Image corrUI;
 
     // Call the player from the player list so that if the player respawns, this doesn't break.
@@ -38,7 +44,6 @@ public class CorrManager : MonoBehaviour
     {
         //corrUI.sprite = corrBase;
         tempColor = corrUI.color;
-        respawn = RespPlayer();
 
         // Loop through to find where the player respawn is.
         var childCount = playerList.transform.childCount;
@@ -50,11 +55,19 @@ public class CorrManager : MonoBehaviour
             if (childTag == "Respawn")
                 respawnLoc = child.gameObject;
         }
+
+        //fastCorrAnim.Play("uicorr1");
+        slowCorrAnim.Play("slowCorr0");
     }
 	
 
 	void Update ()
     {
+        // Hitting escape quits the game. Don't ask why it's here, it's pretty much just last minute.
+        if (Input.GetKey("escape"))
+        {
+            Application.Quit();
+        }
 
         // If the player is not currently set, find and set it.
         if (player == null || player.Equals(null))
@@ -70,10 +83,31 @@ public class CorrManager : MonoBehaviour
             }
         }
 
-        // Used for determining opacity of our corruption UI.
+        // Used for animations.
         if (player != null)
-            corruption = (float)player.GetComponentInChildren<Corruption>().corrSlow;
+        { 
+            corruption = (float)player.GetComponentInChildren<Corruption>().corrSlow; // Actually just used for the slow corruption.
+            fastCorr = player.GetComponentInChildren<Corruption>().corrFast;
+            corrupting = player.GetComponentInChildren<Corruption>().corrupting; // Sets a bool to allow the fast anim to loop
+        }
+        else
+        {
+            fastCorr = 0;
+            corrupting = false;
+        }
 
+        slowCorrAnim.SetFloat("corrSlow", corruption);
+
+        if (corrupting)
+        {
+            fastCorrAnim.SetBool("canLoop", true);
+            fastCorrAnim.SetFloat("animDirection", 1.0f);
+        }
+        else
+        {
+            fastCorrAnim.SetBool("canLoop", false);
+            fastCorrAnim.SetFloat("animDirection", -1.0f);
+        }
 
         // As alpha can not be directly set, we instead set a tempColor, change its alpha, and set our UI color to that.
         // It's really dumb and it sounds redundant, I know.
@@ -83,7 +117,7 @@ public class CorrManager : MonoBehaviour
             corrUI.color = tempColor;
         }
 
-        if (corruption >= 100)
+        if (corruption >= 100 || Input.GetKey("r"))
         {
             //corrUI.sprite = corrEnd;
             corrAnim.SetBool("CorrFull", true);
@@ -91,7 +125,8 @@ public class CorrManager : MonoBehaviour
             Destroy(player);
             if (!respawning)
             {
-                StartCoroutine(respawn);
+                StopCoroutine(RespPlayer());
+                StartCoroutine(RespPlayer());
                 respawning = true;
             }
         }
