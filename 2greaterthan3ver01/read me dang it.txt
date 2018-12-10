@@ -11,3 +11,5 @@ Corruption: Corruption now decays at half the rate the player would corrupt if t
 UI: A sphere fills up to indicate "fast" corruption ticks. Corruption does not settle in until it fills up completely. For every ten points of "slow" corruption (gained when the fast completely ticks), a bar will fill up in a second indicator. 
 
 Misc: The Escape key now quits the game. The R key will destroy the player and initiate the respawn sequence. 
+
+https://puu.sh/CfcJp/39fb842d0c.png Here is what my heirarchy looks like, for my little test level. Unfortunately there's a bit of spaghetti code I'm admittedly too lazy to fix, so we get to deal with three layers of inane player respawning! Yay!

@@ -760,7 +760,7 @@ Transform:
   m_LocalScale: {x: 0.38801, y: 3.6651, z: 2.7229}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90.00001}
 --- !u!114 &1053609582
 MonoBehaviour:
@@ -1568,7 +1568,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4059571459242600, guid: 9e9e405c94af1a846ad18769f2d1b235, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e9e405c94af1a846ad18769f2d1b235, type: 2}
@@ -1611,7 +1611,7 @@ Transform:
   - {fileID: 676348282}
   - {fileID: 1431194639}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1854267251 stripped
 Animator:
