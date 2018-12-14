@@ -168,7 +168,7 @@ public class GrabThrow : MonoBehaviour
             if (other.tag == "Pushable")
             {
                 Debug.Log("Release");
-                other.gameObject.GetComponent<Rigidbody>().drag = 100.0f;
+                other.gameObject.GetComponent<Rigidbody>().drag = 0.2f;
                 rb.gameObject.GetComponent<BasicMovement>().pushing = false;
                 occupied = false;
 

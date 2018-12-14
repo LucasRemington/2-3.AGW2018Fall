@@ -21,7 +21,7 @@ public class CorrManager : MonoBehaviour
     // Call the player from the player list so that if the player respawns, this doesn't break.
     public GameObject playerList;
     [SerializeField] private GameObject player;
-    private GameObject respawnLoc;
+    [HideInInspector] public GameObject respawnLoc;
 
     //In fact, let's also call the prefab for the player so we CAN respawn them.
     public GameObject plPrefab;
@@ -63,11 +63,7 @@ public class CorrManager : MonoBehaviour
 
 	void Update ()
     {
-        // Hitting escape quits the game. Don't ask why it's here, it's pretty much just last minute.
-        if (Input.GetKey("escape"))
-        {
-            Application.Quit();
-        }
+        
 
         // If the player is not currently set, find and set it.
         if (player == null || player.Equals(null))

@@ -114,6 +114,7 @@
     <Compile Include="Assets\Cinemachine\Timeline\CinemachineMixer.cs" />
     <Compile Include="Assets\Cinemachine\Timeline\CinemachineShot.cs" />
     <Compile Include="Assets\Cinemachine\Timeline\CinemachineTrack.cs" />
+    <Compile Include="Assets\Scripts\AppControl.cs" />
     <Compile Include="Assets\Scripts\BasicMovement.cs" />
     <Compile Include="Assets\Scripts\Button.cs" />
     <Compile Include="Assets\Scripts\CinePlayerGrab.cs" />
@@ -128,6 +129,7 @@
     <Compile Include="Assets\Scripts\GrabThrow.cs" />
     <Compile Include="Assets\Scripts\ObjectGrav.cs" />
     <Compile Include="Assets\Scripts\PressurePlate.cs" />
+    <Compile Include="Assets\Scripts\RoomTransition.cs" />
     <None Include="Assets\Cinemachine\ReleaseNotes.txt" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>D:/Cyndan/Documents/Unity/2D3D/2greaterthan3ver01/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>

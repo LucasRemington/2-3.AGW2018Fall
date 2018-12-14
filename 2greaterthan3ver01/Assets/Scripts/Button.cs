@@ -24,12 +24,17 @@ public class Button : MonoBehaviour
 
         if (gravityMult == 0)
             gravityMult = 1.1f;
+
+        if (left || right)
+            rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+        else
+            rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
     }
 
     private void Update()
     {
         if (left || right)
-            rb.AddForce(dir, 0, 0, ForceMode.Force);
+            rb.AddForce(dir * gravityMult * 2, 0, 0, ForceMode.Force);
 
 
         else if (!down)
@@ -42,13 +47,15 @@ public class Button : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.gameObject.tag);
-        if (other.tag == "Button")
+        if (other.tag == "Button" && gameObject.GetComponent<Flag>().status == false)
             gameObject.GetComponent<Flag>().status = true;
+        else if (other.tag == "Button" && gameObject.GetComponent<Flag>().status)
+            gameObject.GetComponent<Flag>().status = false;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (hold && other.tag == "Button")
+        if (hold && other.tag == "Button" && gameObject.GetComponent<Flag>().status)
             gameObject.GetComponent<Flag>().status = false;
     }
 }
